@@ -33,8 +33,12 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">24dp</item>
     </style>
-    <style name="html_h4">
-        <item name="android:textColor">@android:color/black</item>
+    <style name="html_h41">
+        <item name="android:textColor">#707070</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+    <style name="html_h42">
+        <item name="android:textColor">#708090</item>
         <item name="android:textSize">20dp</item>
     </style>
     <style name="html_h5">

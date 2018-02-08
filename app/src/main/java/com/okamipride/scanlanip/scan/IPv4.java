@@ -32,15 +32,15 @@ public class IPv4 {
     int baseIPnumeric;
     int netmaskNumeric;
 
-/**
-* Specify IP address and netmask like: new
-* IPv4("10.1.0.25","255.255.255.16")
-* @param symbolicIP
-* @param netmask
-* 
-*/
+    /**
+     * Specify IP address and netmask like: new
+     * IPv4("10.1.0.25","255.255.255.16")
+     *
+     * @param symbolicIP
+     * @param netmask
+     */
     public IPv4(String symbolicIP, String netmask) throws NumberFormatException {
-    	  /* IP */
+          /* IP */
         String[] st = symbolicIP.split("\\.");
 
         if (st.length != 4)
@@ -55,7 +55,7 @@ public class IPv4 {
 
             if (value != (value & 0xff)) {
 
-                throw new NumberFormatException("Invalid IP address: "+ symbolicIP);
+                throw new NumberFormatException("Invalid IP address: " + symbolicIP);
             }
 
             baseIPnumeric += value << i;
@@ -84,7 +84,7 @@ public class IPv4 {
 
             if (value != (value & 0xff)) {
 
-                throw new NumberFormatException("Invalid netmask address: "  + netmask);
+                throw new NumberFormatException("Invalid netmask address: " + netmask);
             }
 
             netmaskNumeric += value << i;
@@ -114,11 +114,11 @@ public class IPv4 {
         }
     }
 
-/**
-* Specify IP in CIDR format like: new IPv4("10.1.0.25/16");
-*
-*@param IPinCIDRFormat
-*/
+    /**
+     * Specify IP in CIDR format like: new IPv4("10.1.0.25/16");
+     *
+     * @param IPinCIDRFormat
+     */
     public IPv4(String IPinCIDRFormat) throws NumberFormatException {
 
         String[] st = IPinCIDRFormat.split("\\/");
@@ -167,10 +167,10 @@ public class IPv4 {
     }
 
     /**
-* Get the IP in symbolic form, i.e. xxx.xxx.xxx.xxx
-*
-*@return
-*/
+     * Get the IP in symbolic form, i.e. xxx.xxx.xxx.xxx
+     *
+     * @return
+     */
     public String getIP() {
         return convertNumericIpToSymbolic(baseIPnumeric);
 
@@ -191,11 +191,11 @@ public class IPv4 {
         return sb.toString();
     }
 
-/**
-* Get the net mask in symbolic form, i.e. xxx.xxx.xxx.xxx
-*
-*@return
-*/
+    /**
+     * Get the net mask in symbolic form, i.e. xxx.xxx.xxx.xxx
+     *
+     * @return
+     */
 
     public String getNetmask() {
         StringBuffer sb = new StringBuffer(15);
@@ -212,11 +212,11 @@ public class IPv4 {
         return sb.toString();
     }
 
-/**
-* Get the IP and netmask in CIDR form, i.e. xxx.xxx.xxx.xxx/xx
-*
-*@return
-*/
+    /**
+     * Get the IP and netmask in CIDR form, i.e. xxx.xxx.xxx.xxx/xx
+     *
+     * @return
+     */
 
     public String getCIDR() {
         int i;
@@ -229,12 +229,12 @@ public class IPv4 {
         return convertNumericIpToSymbolic(baseIPnumeric & netmaskNumeric) + "/" + i;
     }
 
-/**
-* Get an arry of all the IP addresses available for the IP and netmask/CIDR
-* given at initialization
-*
-*@return
-*/
+    /**
+     * Get an arry of all the IP addresses available for the IP and netmask/CIDR
+     * given at initialization
+     *
+     * @return
+     */
     public List<String> getAvailableIPs(Integer numberofIPs) {
 
         ArrayList<String> result = new ArrayList<String>();
@@ -267,11 +267,11 @@ public class IPv4 {
         return result;
     }
 
-/**
-* Range of hosts
-*
-*@return
-*/
+    /**
+     * Range of hosts
+     *
+     * @return
+     */
     public String getHostAddressRange() {
 
         int numberOfBits;
@@ -294,11 +294,11 @@ public class IPv4 {
         return firstIP + " - " + lastIP;
     }
 
-/**
-* Returns number of hosts available in given range
-*
-*@return number of hosts
-*/
+    /**
+     * Returns number of hosts available in given range
+     *
+     * @return number of hosts
+     */
     public Long getNumberOfHosts() {
         int numberOfBits;
 
@@ -317,11 +317,11 @@ public class IPv4 {
         return x.longValue();
     }
 
-/**
-* The XOR of the netmask
-*
-*@return wildcard mask in text form, i.e. 0.0.15.255
-*/
+    /**
+     * The XOR of the netmask
+     *
+     * @return wildcard mask in text form, i.e. 0.0.15.255
+     */
 
     public String getWildcardMask() {
         Integer wildcardMask = netmaskNumeric ^ 0xffffffff;
@@ -394,12 +394,12 @@ public class IPv4 {
         return getBinary(netmaskNumeric);
     }
 
-/**
-* Checks if the given IP address contains in subnet
-*
-*@param IPaddress
-*@return
-*/
+    /**
+     * Checks if the given IP address contains in subnet
+     *
+     * @param IPaddress
+     * @return
+     */
     public boolean contains(String IPaddress) {
 
         Integer checkingIP = 0;
@@ -464,7 +464,7 @@ public class IPv4 {
 
         if (IPAddress
                 .matches("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$")) {
-        	
+
             return true;
         }
         return false;

@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
-  android:layout_width="fill_parent"  
-  android:layout_height="fill_parent">  
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="3dp">
 
-  
+    <TextView
+        android:id="@+id/tv_myself"
+        style="@style/html_h3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/myself" />
+
+    <include
+        android:id="@+id/include_myself"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_myself"
+        layout="@layout/item_view" />
+
+    <TextView
+        android:id="@+id/tv_total_result"
+        style="@style/html_h3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/include_myself"
+        android:text="@string/total_result" />
+
     <ListView
         android:id="@+id/lsv_ips"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_search"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/btn_search" >
-    </ListView>
-    
-     <Button
-       android:id="@+id/btn_search"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-       android:text="Discovering"
-       android:layout_alignParentBottom="true" 
-     />
-    
+        android:layout_below="@+id/tv_total_result"
+        android:layout_marginTop="3dp"></ListView>
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Discovering" />
+
 </RelativeLayout>  
