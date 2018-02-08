@@ -164,7 +164,7 @@ public class NetUtil {
                         e.printStackTrace();
                     }
 
-                    if (TextUtils.isEmpty(mac)) {
+                    if (TextUtils.isEmpty(mac) || mac.contains("00:00:00:00")) {
                         mac = readDevMacFromEth0();
                     }
                     if (TextUtils.isEmpty(ip) || !isIpString(ip)) {
