@@ -85,7 +85,7 @@ public class NetUtil {
                         }
                     }
 
-                    if (TextUtils.isEmpty(mac)) {
+                    if (TextUtils.isEmpty(mac) || mac.contains("00:00:00:00")) {
                         mac = readDevMacFromWlan0();
                     }
                     if (TextUtils.isEmpty(ip) || !isIpString(ip)) {
