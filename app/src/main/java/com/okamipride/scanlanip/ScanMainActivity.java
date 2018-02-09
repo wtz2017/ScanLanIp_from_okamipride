@@ -9,12 +9,14 @@ import android.content.DialogInterface.OnKeyListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.okamipride.scanlanip.scan.IpUtil;
 import com.okamipride.scanlanip.scan.NetUtil;
@@ -128,11 +130,8 @@ public class ScanMainActivity extends Activity implements OnClickListener{
 		protected void onCancelled() {
 			super.onCancelled();
 			Log.d(TAG, "ScanIpAsyncTask Cancel");
-			if (syncProgress != null && syncProgress.isShowing()) {
-				syncProgress.dismiss();
-				syncProgress = null;
-			}
-			cancel(true);
+            dismissProgress();
+            cancel(true);
 		}
 
 		@Override
@@ -174,12 +173,9 @@ public class ScanMainActivity extends Activity implements OnClickListener{
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (syncProgress != null && syncProgress.isShowing()) {
-				syncProgress.dismiss();
-				syncProgress = null;
-			}
+            dismissProgress();
 
-			if (result) {
+            if (result) {
 				scanResult.clear();
 				scanResult.addAll(deviceList);
 				Log.e(TAG,"scanResult size =" +Integer.toString(scanResult.size()));//finish();
@@ -187,11 +183,21 @@ public class ScanMainActivity extends Activity implements OnClickListener{
 				scanResult.clear();
 				Log.e(TAG,"false scanResult size =" +Integer.toString(scanResult.size()));//finish();
 				//finish();
+                Toast toast = Toast.makeText(ScanMainActivity.this, "Please check LAN network!", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
 			}
 
             int count = (deviceList == null) ? 0 : deviceList.size();
             updateTotalCount(count);
             ipAdpater.notifyDataSetChanged();
+        }
+
+        private void dismissProgress() {
+            if (syncProgress != null && syncProgress.isShowing()) {
+                syncProgress.dismiss();
+                syncProgress = null;
+            }
         }
 
         @Override

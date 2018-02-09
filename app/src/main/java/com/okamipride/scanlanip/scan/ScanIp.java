@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class ScanIp {
@@ -105,6 +106,9 @@ public class ScanIp {
         Map<String, String> netInfo = NetUtil.getNetworkInfo(contxt);
         scanIpAddr = netInfo.get("ip");
         scanMask = netInfo.get("mask");
+        if (TextUtils.isEmpty(scanIpAddr) || TextUtils.isEmpty(scanMask)) {
+            return;
+        }
 
         // Detect start and end addr
         cidr = IpUtil.IpToCidr(scanMask);
